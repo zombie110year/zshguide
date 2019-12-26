@@ -143,6 +143,25 @@ good
 ```
 
 给 cat 的标准输出重定向 3 个文件，它将 3 个文件的内容全部读取了出来。
+读取的顺序和重定向指令的顺序一致：
+
+```zsh
+% for c ({a..e}) {
+> print $c > $c.txt
+> }
+% cat <e.txt <d.txt <c.txt <b.txt <a.txt
+e
+d
+c
+b
+a
+% cat <d.txt <e.txt <c.txt <a.txt <b.txt
+d
+e
+c
+a
+b
+```
 
 除了能同时重定向 fd 到多个文件外，还可以同时重定向到管道和文件。
 
